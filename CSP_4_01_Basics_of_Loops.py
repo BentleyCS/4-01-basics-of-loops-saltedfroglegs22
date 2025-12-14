@@ -7,6 +7,12 @@ def oddNumbers(n:int) ->str:
     example oddNumbers(8) -> "1 3 5 7"
     example oddNumbers(-8) -> ""
     """
+    answer = ""
+    for i in range(1, n+1, 2):
+        answer += str(i) + " "
+    answer = answer[0 : len(answer) - 1]
+    return answer
+print(oddNumbers(5))
 
 
 def backwards(n)-> int:
@@ -17,8 +23,15 @@ def backwards(n)-> int:
     example backwards(8) -> "8 7 6 5 4 3 2 1"
     example backwards(-2) -> ""
     """
+    answer = ""
+    while n>= 1:
+        answer += str(n) + " "
+        n -= 1
+    answer = answer[0 : len(answer) - 1]
+    return answer
+print(backwards(5))
 
-
+import random
 
 def randomRepeating():
     """
@@ -27,8 +40,17 @@ def randomRepeating():
     NOTE: Given randomness no test for this question
     :return:
     """
-    tries = 0
-    print(f"it took {tries} tries to get a 10")
+
+    iteration = 0
+    i = 0
+    while i != 10:
+        i = random.randint(1, 10)
+        iteration += 1
+    print(f"it took {iteration} tries roll a 10")
+randomRepeating()
+
+
+
 def randomRange(n):
     """
     Generate a random number from 1 to 100 n number of times. Then after that is
@@ -37,6 +59,21 @@ def randomRange(n):
     :param n:
     :return:
     """
+    low = 101
+    high = 0
+    for i in range(n):
+        num = random.randint(1,100)
+        if num < low:
+            low = num
+        if num > high:
+            high = num
+    print(f"your high is {high} your low is {low}")
+randomRange(5)
+
+
+
+
+
 def reverse(word:str)->str:
     """
     Takes in a string as an argument and return the given string in reverse.
@@ -44,20 +81,45 @@ def reverse(word:str)->str:
     example reverse("Hello") -> "olleH"
     """
 
+    answer = ""
+    for i in range(len(word)-1, -1, -1):
+        answer = answer + word[i]
+    return(answer)
+reverse("cat")
+
+
+
 def fizzBuzzContinuous(n):
     """
     Modify the function such that it does the fizzbuzz operation on all numbers
     from 1 to n(inclusive).
     Fizz buzz is defined as
-    if the number is divisble by 3 print fizz
+    if the number is divisible by 3 print fizz
     if the number is divisible by 5 print buzz
     if the number is divisible by both 3 and 5 print fizzbuzz
     if none of the above apply print the number.
 
-    As with above questions add each anseer to a string and return the final string.
+    As with above questions add each answer to a string and return the final string.
     :param n:
     :return:
     """
+
+    answer = ""
+    for f in range(1, n+1):
+        if f%3 and f%5 == 0:
+            answer = answer + "fizzbuzz "
+        elif f%5 == 0:
+            answer = answer + "buzz "
+        elif f%3 == 0:
+            answer = answer + "fizz "
+        else:
+            answer = answer + str(f) + " "
+    answer = answer[0:len(answer)-1]
+    return answer
+print(fizzBuzzContinuous(16))
+
+
+
 
 def collatz(n):
     """
@@ -70,6 +132,17 @@ def collatz(n):
     :return:
     """
 
+    answer = ""
+    while n != 1:
+        if n%2==0:
+            n=n/2
+            answer = answer + str(int(n)) + " "
+        else:
+            n=(3*n)+1
+            answer = answer + str(int(n)) + " "
+    answer = answer[0:len(answer)-1]
+    return answer
+print(collatz(5))
 
 def fibonacci(n):
     """
@@ -84,5 +157,22 @@ def fibonacci(n):
     :return:
     """
 
-
+    answer = ""
+    previous = 0
+    current = 1
+    if n==0:
+        pass
+    elif n==1:
+        answer += "0 "
+    elif n==2:
+        answer += "0 1 "
+    elif n > 2:
+        answer += "0 1 "
+        for i in range(2, n):
+            new = previous + current
+            previous = current
+            current = new
+            answer += str(new) + " "
+    answer = answer[0:len(answer)-1]
+    return answer
 print(fibonacci(300))
